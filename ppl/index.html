@@ -69,6 +69,28 @@
         color: var(--white);
       }
 
+      /* Video */
+      .video-section {
+        width: 100%;
+        margin-top: 2rem;
+        animation: rise 0.55s ease 0.05s both;
+      }
+      .video-section video {
+        display: block;
+        width: 100%;
+        aspect-ratio: 9 / 16;
+        border-radius: 0.875rem;
+        object-fit: cover;
+        background: var(--bg-deep);
+        box-shadow: 0 14px 32px rgba(0, 0, 0, 0.28);
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .video-section video:focus-visible {
+        outline: 3px solid var(--white);
+        outline-offset: 3px;
+      }
+
       /* Links */
       .links {
         width: 100%;
@@ -143,7 +165,7 @@
         to { opacity: 1; transform: translateY(0); }
       }
       @media (prefers-reduced-motion: reduce) {
-        .profile, .links, footer { animation: none; }
+        .profile, .video-section, .links, footer { animation: none; }
         .btn { transition: none; }
         .btn:hover { transform: none; }
       }
@@ -162,8 +184,12 @@
         <h1 class="handle">@ppl.weknowppl</h1>
       </header>
 
+      <section class="video-section" aria-label="How PPL works">
+        <video src="ppl-workflow-short.mp4" autoplay muted loop playsinline></video>
+      </section>
+
       <nav class="links" aria-label="Links">
-        <a class="btn btn-hero" href="https://cmiranda787-maker.github.io/links/wkp/" target="_blank" rel="noopener noreferrer">
+        <a class="btn btn-hero" href="https://muse.ai/s/wkp-one-pager-hm6ixqxqq1xwrh/alf69rCrMOeaoxZwM7zkaUYU99pPLCew2VPJqhB_i-g" target="_blank" rel="noopener noreferrer">
           WKP Website
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg>
         </a>
@@ -177,5 +203,43 @@
         <p>© 2026 we know ppl.</p>
       </footer>
     </main>
+    <script>
+      (function () {
+        var video = document.querySelector(".video-section video");
+        if (!video) return;
+
+        video.setAttribute("tabindex", "0");
+        video.setAttribute("role", "button");
+        video.setAttribute("aria-label", "How to Build an AI-Run Content Workflow. Tap to turn sound on.");
+        video.setAttribute("aria-pressed", "false");
+
+        function toggleMute() {
+          video.muted = !video.muted;
+          video.setAttribute("aria-pressed", String(!video.muted));
+          video.setAttribute(
+            "aria-label",
+            video.muted
+              ? "How to Build an AI-Run Content Workflow. Tap to turn sound on."
+              : "How to Build an AI-Run Content Workflow. Tap to mute."
+          );
+          if (!video.muted) {
+            var playPromise = video.play();
+            if (playPromise && playPromise.catch) playPromise.catch(function () {});
+          }
+        }
+
+        video.addEventListener("click", toggleMute);
+        video.addEventListener("keydown", function (event) {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            toggleMute();
+          }
+        });
+
+        if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          video.pause();
+        }
+      })();
+    </script>
   </body>
 </html>
