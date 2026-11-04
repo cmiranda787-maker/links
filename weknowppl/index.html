@@ -80,6 +80,21 @@
         color: var(--white-soft);
       }
 
+      /* ---------- Video ---------- */
+
+      .video-wrap {
+        width: 100%;
+        margin-top: clamp(2.5rem, 7vh, 3.75rem);
+      }
+
+      .video-wrap video {
+        display: block;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        border-radius: 1rem;
+        background: #000;
+      }
+
       /* ---------- Links ---------- */
 
       .links {
@@ -87,7 +102,7 @@
         display: flex;
         flex-direction: column;
         gap: 1rem;
-        margin-top: clamp(2.5rem, 7vh, 3.75rem);
+        margin-top: 1.5rem;
       }
 
       .btn {
@@ -191,10 +206,14 @@
           <p class="handle">@weknowppl</p>
         </header>
 
+        <section class="video-wrap" aria-label="The Escalation of Agency">
+          <video src="wkp-escalation-cinematic.mp4" poster="wkp-cinematic-poster.jpg" controls preload="none"></video>
+        </section>
+
         <nav class="links" aria-label="we know ppl. links">
           <a
             class="btn btn-hero"
-            href="https://cmiranda787-maker.github.io/links/wkp/"
+            href="https://muse.ai/s/wkp-one-pager-hm6ixqxqq1xwrh/alf69rCrMOeaoxZwM7zkaUYU99pPLCew2VPJqhB_i-g"
             target="_blank"
             rel="noopener noreferrer"
           >
