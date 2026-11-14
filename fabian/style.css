@@ -318,7 +318,9 @@ video {
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   background: #000;
+  color: #fff8ec; /* fallback text, shown only if the video cannot play */
 }
+video a { color: var(--yellow); }
 .video-grid {
   display: grid;
   gap: 2rem;
@@ -394,7 +396,7 @@ video {
   flex-shrink: 0;
 }
 .carousel-btn:hover { transform: translateY(-2px); }
-.carousel-btn:disabled { opacity: .45; cursor: default; transform: none; }
+.carousel-btn:disabled { opacity: .6; cursor: default; transform: none; }
 .dots { display: flex; gap: .6rem; }
 .dot {
   width: 22px;
@@ -487,6 +489,7 @@ section[id] { scroll-margin-top: 90px; }
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   background: #fff;
+  color: var(--indigo); /* fallback text, shown only if the form cannot load */
 }
 
 .price-row { display: flex; flex-wrap: wrap; gap: 1rem; margin: 1.1rem 0; }
@@ -576,6 +579,14 @@ section[id] { scroll-margin-top: 90px; }
   .price-card .price { color: var(--chip-teal); }
   .btn.cream { background: #fff8ec; color: var(--indigo); }
   a { color: var(--yellow); }
+  /* Text on grounds that do NOT flip in dark mode keeps a fixed light
+     color: var(--cream) flips dark, so it can never be used for text on
+     the header, hero, indigo sections, footer, or the ghost button. */
+  .site-header, .brand, .nav a, .hero,
+  section.block.indigo, section.block.indigo h2, section.block.indigo h3,
+  .site-footer { color: #fff8ec; }
+  .btn.ghost { color: #fff8ec; border-color: #fff8ec; }
+  section.block.yellow figcaption { color: #fff8ec; }
   .coming-soon { background: rgba(255, 255, 255, .08); }
   section.block.yellow { background: #8a6d00; }
   section.block.yellow h2, section.block.yellow p { color: #fff8ec; }
