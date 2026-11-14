@@ -43,6 +43,9 @@
       });
       prev.disabled = i === 0;
       next.disabled = i === slides.length - 1;
+      // Slides vary in height (trimmed book pages); size the track to
+      // the visible slide so no dead space sits under short slides.
+      track.style.height = slides[i].offsetHeight + 'px';
     }
 
     function goTo(i) {

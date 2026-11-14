@@ -121,6 +121,13 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 .nav a.join { background: var(--teal); color: #fff; }
 .nav a.join:hover { background: #01857f; }
 
+/* On phones the two-row header would eat ~110px of sticky viewport —
+   let it scroll away; the sticky bar stays on desktop. */
+@media (max-width: 759px) {
+  .site-header { position: static; }
+  .header-inner { padding: .6rem 1.1rem .5rem; }
+}
+
 /* ---------- Hero / sections ---------- */
 .hero {
   background: linear-gradient(160deg, var(--indigo) 0%, var(--indigo-deep) 100%);
@@ -128,6 +135,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
   padding: 2.5rem 0 2.75rem;
 }
 .hero .yellow { color: var(--yellow); }
+.hero a.handle { color: var(--yellow); font-weight: 700; }
 .hero-grid {
   display: grid;
   gap: 1.75rem;
@@ -162,6 +170,9 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
   border-radius: 999px;
   box-shadow: var(--shadow-sm);
   transform: rotate(-1deg);
+}
+@media (max-width: 480px) {
+  .tagline { font-size: 1.02rem; }
 }
 
 .chips { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1.1rem 0 1.25rem; }
@@ -292,7 +303,7 @@ figcaption {
   align-items: start;
 }
 @media (min-width: 760px) {
-  .media-grid { grid-template-columns: .9fr 1.1fr; }
+  .media-grid { grid-template-columns: .9fr 1.1fr; align-items: center; }
   .media-grid.flip { grid-template-columns: 1.1fr .9fr; }
 }
 .media-grid img { width: 100%; }
@@ -337,7 +348,7 @@ video {
 }
 
 /* ---------- Carousel ---------- */
-.carousel { position: relative; max-width: 560px; margin-inline: auto; }
+.carousel { position: relative; max-width: 480px; margin-inline: auto; }
 .carousel-track {
   display: flex;
   gap: 1.25rem;
@@ -346,6 +357,8 @@ video {
   scroll-behavior: smooth;
   padding: .5rem .5rem 1rem;
   -webkit-overflow-scrolling: touch;
+  align-items: flex-start;
+  transition: height .25s ease;
 }
 .carousel-track figure {
   flex: 0 0 100%;
@@ -375,13 +388,15 @@ video {
   box-shadow: var(--shadow-sm);
   padding: .4rem 1.1rem;
   cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 .carousel-btn:hover { transform: translateY(-2px); }
 .carousel-btn:disabled { opacity: .45; cursor: default; transform: none; }
-.dots { display: flex; gap: .5rem; }
+.dots { display: flex; gap: .6rem; }
 .dot {
-  width: 16px;
-  height: 16px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   border: 3px solid var(--indigo);
   background: #fff;
@@ -389,6 +404,30 @@ video {
   padding: 0;
 }
 .dot[aria-current="true"] { background: var(--teal); }
+
+/* ---------- Jump nav (Watch page) ---------- */
+.jump-nav { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.1rem; }
+.jump-nav a {
+  font-family: "Baloo 2", sans-serif;
+  font-weight: 800;
+  font-size: 1rem;
+  color: var(--indigo);
+  background: #fff;
+  border: 3px solid var(--indigo);
+  border-radius: 999px;
+  padding: .3rem .9rem;
+  text-decoration: none;
+  box-shadow: var(--shadow-sm);
+}
+.jump-nav a:hover { background: var(--yellow); }
+section[id] { scroll-margin-top: 90px; }
+
+/* Freddy portrait on Home: capped so it never dominates the section */
+.freddy-photo {
+  width: min(100%, 280px);
+  margin: 0 auto;
+  box-shadow: 8px 8px 0 rgba(0, 0, 0, .35);
+}
 
 /* ---------- Lists ---------- */
 .lessons {
